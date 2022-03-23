@@ -1,5 +1,7 @@
 # vue-json-schema-editor-visual
 
+fork FROM
+后续修改：剥离vue、elementui依赖 缩小包体
 [![](https://img.shields.io/npm/v/vue-json-schema-editor-visual.svg?style=flat-square)](https://www.npmjs.com/package/vue-json-schema-editor-visual)
 
 A json-schema editor of high efficient and easy-to-use, base on Vue & Element UI.
