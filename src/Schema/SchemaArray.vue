@@ -184,7 +184,7 @@ export default {
     data() {
         return {
             tagPaddingLeftStyle: {},
-            schemaTypes: SCHEMA_TYPE,
+            schemaTypes: ["string", "number", "boolean"],
             items: this.data.items,
             showIcon: false,
         };
