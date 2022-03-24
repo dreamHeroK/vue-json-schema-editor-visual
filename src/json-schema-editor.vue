@@ -40,19 +40,6 @@
                         </el-col>
                     </el-row>
                 </el-col>
-                <el-col :span="3"
-                        class="col-item col-item-type">
-                    <el-select :value="schemaData.type"
-                               :disabled="schemaData.disabled && !schemaData.canChangeType"
-                               class="type-select-style"
-                               size="small"
-                               @change="handleChangeType2($event)">
-                        <el-option v-for="item in schemaTypes"
-                                   :key="item"
-                                   :value="item"
-                                   :label="item"></el-option>
-                    </el-select>
-                </el-col>
                 <el-col v-if="isMock"
                         :span="3"
                         class="col-item col-item-mock">
@@ -124,8 +111,9 @@
                 </el-col>
                 <el-col :span="2"
                         class="col-item col-item-setting"
-                        v-if="showSetting">
+                    >
                     <span class="adv-set"
+                     v-if="showSetting"
                           @click="
               handleSchemaUpdateEvent({
                 eventType: 'setting',
@@ -140,7 +128,7 @@
                         </el-tooltip>
                     </span>
 
-                    <span v-if="schemaData.type === 'object'"
+                    <span
                           @click="
               handleSchemaUpdateEvent({
                 eventType: 'add-field',
@@ -160,6 +148,8 @@
                          :is-mock="isMock"
                          :show-title="showTitle"
                          :show-default-value="showDefaultValue"
+                         :show-setting="showSetting"
+                         :show-desc="showDesc"
                          :editor-id="editorId" />
             <!-- RAW弹窗 -->
             <RawDialog v-if="showRaw"

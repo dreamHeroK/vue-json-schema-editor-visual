@@ -8,6 +8,8 @@
         :show-title="showTitle"
         :show-default-value="showDefaultValue"
         :editor-id="editorId"
+        :showDesc="showDesc"
+        :showSetting="showSetting"
       />
     </template>
     <template v-if="data.type==='object'">
@@ -18,6 +20,8 @@
         :show-title="showTitle"
         :show-default-value="showDefaultValue"
         :editor-id="editorId"
+        :showDesc="showDesc"
+        :showSetting="showSetting"
       />
     </template>
   </div>
@@ -48,6 +52,14 @@ export default {
     editorId: {
       type: String,
       default: 'editor_id'
+    },
+    showDesc:{
+      type:Boolean,
+      default:false
+    },
+    showSetting:{
+      type:Boolean,
+      default:false
     }
   },
   data() {

@@ -17,7 +17,6 @@ export const SCHEMA_TYPE = [
   'array',
   'object',
   'boolean',
-  'integer'
 ];
 export const defaultInitSchemaData = {
   type: 'object',
