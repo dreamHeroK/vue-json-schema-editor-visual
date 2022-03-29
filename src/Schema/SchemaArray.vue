@@ -2,7 +2,7 @@
     <div class="array-type">
         <el-row type="flex"
                 align="middle">
-            <el-col :span="8"
+            <el-col :span="showDesc?8:16"
                     class="col-item name-item col-item-name"
                     :style="tagPaddingLeftStyle">
                 <el-row type="flex"
@@ -19,22 +19,20 @@
                                class="el-icon-caret-right icon-object"></i>
                         </span>
                     </el-col>
-                    <el-col :span="20">
+                    <el-col :span="16">
                         <el-input disabled
                                   value="Items"
                                   size="small" />
                     </el-col>
-                    <el-col :span="2"
+                    <el-col :span="6"
                             style="text-align: center">
-                        <el-tooltip placement="top"
-                                    content="全选">
-                            <el-checkbox disabled />
-                        </el-tooltip>
+                        是否必须:
+                        <el-checkbox disabled />
                     </el-col>
                 </el-row>
             </el-col>
 
-            <el-col :span="3"
+            <el-col :span="showDesc?3:8"
                     class="col-item col-item-type">
                 <el-select :value="items.type"
                            size="small"

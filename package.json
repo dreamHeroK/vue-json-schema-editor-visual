@@ -1,6 +1,6 @@
 {
     "name": "vue-json-schema-k",
-    "version": "0.0.9",
+    "version": "0.0.17",
     "description": "A json-schema editor of high efficient and easy-to-use, base on Vue.",
     "keywords": [
         "json-schema"

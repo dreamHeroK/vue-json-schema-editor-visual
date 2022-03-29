@@ -8,7 +8,7 @@
         <div class="json-schema-vue-editor">
             <el-row type="flex"
                     align="middle">
-                <el-col :span="8"
+                <el-col :span="showDesc?8:16"
                         class="col-item name-item col-item-name">
                     <el-row type="flex"
                             justify="space-around"
@@ -29,14 +29,12 @@
                                       value="root"
                                       size="small" />
                         </el-col>
-                        <el-col :span="2"
+                        <el-col :span="4"
                                 style="text-align: center">
-                            <el-tooltip placement="top"
-                                        content="全选">
+                                全选
                                 <el-checkbox :checked="checked"
                                              :disabled="disabled"
                                              @change="changeCheckBox" />
-                            </el-tooltip>
                         </el-col>
                     </el-row>
                 </el-col>
