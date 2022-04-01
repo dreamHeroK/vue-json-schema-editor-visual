@@ -19,14 +19,11 @@
                                class="el-icon-caret-right icon-object"></i>
                         </span>
                     </el-col>
-                    <el-col :span="16"
-                            class="el-input--small">
-                        <input size="small"
-                               class="el-input el-input__inner"
-                               :class="{ 'is-disabled': value.disabled }"
+                    <el-col :span="16">
+                        <el-input size="small"
                                :value="name"
                                :disabled="value.disabled"
-                               @change="handleNameChange" />
+                               @input="handleNameChange" />
                     </el-col>
                     <el-col :span="6"
                             style="text-align: center">
@@ -253,7 +250,7 @@ export default {
         handleNameChange(e) {
             this.handleAction({
                 eventType: "update-field-name",
-                value: e.target.value,
+                value: e,
             });
         },
         handleEnableRequire(e) {

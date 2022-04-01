@@ -31,10 +31,10 @@
                         </el-col>
                         <el-col :span="4"
                                 style="text-align: center">
-                                全选
-                                <el-checkbox :checked="checked"
-                                             :disabled="disabled"
-                                             @change="changeCheckBox" />
+                            全选
+                            <el-checkbox :checked="checked"
+                                         :disabled="disabled"
+                                         @change="changeCheckBox" />
                         </el-col>
                     </el-row>
                 </el-col>
@@ -108,10 +108,9 @@
                     </el-input>
                 </el-col>
                 <el-col :span="2"
-                        class="col-item col-item-setting"
-                    >
+                        class="col-item col-item-setting">
                     <span class="adv-set"
-                     v-if="showSetting"
+                          v-if="showSetting"
                           @click="
               handleSchemaUpdateEvent({
                 eventType: 'setting',
@@ -126,8 +125,7 @@
                         </el-tooltip>
                     </span>
 
-                    <span
-                          @click="
+                    <span @click="
               handleSchemaUpdateEvent({
                 eventType: 'add-field',
                 isChild: false,
@@ -199,6 +197,7 @@ import {
     cloneObject,
     deleteData,
 } from "./utils";
+import Vue from "vue";
 export default {
     name: "SJsonSchemaEditor",
     components: {
@@ -414,14 +413,23 @@ export default {
             let requirePrefix = [];
             const prefixCopy = cloneDeep(prefix);
             prefixCopy.pop();
+            if (prefix[prefix.length - 1] !== "properties") {
+                prefix.push("properties");
+            }
             requirePrefix = prefixCopy; // 上级 required路径
             const parentPrefix = prefix.join(JSONPATH_JOIN_CHAR);
             const curFieldPath = prefix.concat(name).join(JSONPATH_JOIN_CHAR);
-            const cloneSchema = cloneDeep(this.schemaData);
-            const propertiesData = get(cloneSchema, curFieldPath); // 原来的值
+            const cloneSchema = this.schemaData;
+            const propertiesData = get(cloneSchema, prefix); // 原来的值
+            const newPropertiesData = {};
+            for (let i in propertiesData) {
+                if (i === name) {
+                    newPropertiesData[value] = propertiesData[i];
+                } else newPropertiesData[i] = propertiesData[i];
+            }
             unset(cloneSchema, curFieldPath); // 移除
 
-            set(cloneSchema, `${parentPrefix}.${value}`, propertiesData); // 添加
+            set(cloneSchema, `${parentPrefix}`, newPropertiesData); // 添加
 
             // update required name
             let pRequiredData = null;
@@ -439,8 +447,19 @@ export default {
             requirePrefix.push("required");
             set(cloneSchema, requirePrefix, requiredData);
 
-            this.schemaData = cloneSchema;
-            this.forceUpdate();
+            let updateData = null;
+            if (prefix.length > 1) {
+                for (let i = 0; i < prefix.length - 1; i++) {
+                    if (updateData) {
+                        updateData = updateData[prefix[i]];
+                    } else {
+                        updateData = this.schemaData[prefix[i]];
+                    }
+                }
+                this.$set(updateData, "properties", newPropertiesData);
+            } else {
+                this.$set(this.schemaData, "properties", newPropertiesData);
+            }
             this.handleEmitChange(cloneSchema);
         },
         // root
@@ -517,7 +536,6 @@ export default {
         },
         handleSaveShowEdit(opts) {
             const { value, field, name, prefix, isRoot } = opts;
-            // console.log(field, value)
             let parentPrefix;
             const cloneSchema = cloneDeep(this.schemaData);
             if (isRoot) {
@@ -534,7 +552,6 @@ export default {
         // 高级设置
         handleSettingAction(opts) {
             const { schemaType, name, prefix, isRoot } = opts;
-            // console.log(schemaType)
             this.settingDialogVisible[schemaType] = true;
 
             let parentData;
@@ -584,7 +601,6 @@ export default {
             });
         },
         handleEmitChange(schema) {
-            // console.log(schema)
             this.$emit("schema-change", schema);
             this.$emit("update:schema", schema);
         },

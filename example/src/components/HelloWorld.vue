@@ -10,7 +10,7 @@
                            type="info"
                            @click="handlePageParams">Toggle 分页参数</el-button>
                 <json-viewer :value="schema"
-                             :expand-depth=1         
+                             :expand-depth=5       
                              ></json-viewer>
             </el-col>
             <el-col :span="18">
