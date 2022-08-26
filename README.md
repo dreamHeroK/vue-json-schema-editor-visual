@@ -2,6 +2,11 @@
 
 fork FROM
 后续修改：剥离vue、elementui依赖 缩小包体
+
+
+目前改动：
+修复了 输入框输入切换选中第一次无效的问题。
+修复了 输入新的属性名会设置到属性最后的问题。
 [![](https://img.shields.io/npm/v/vue-json-schema-editor-visual.svg?style=flat-square)](https://www.npmjs.com/package/vue-json-schema-editor-visual)
 
 A json-schema editor of high efficient and easy-to-use, base on Vue & Element UI.
@@ -34,15 +39,7 @@ Vue.use(JsonSchemaEditor);
 |      `is-mock`       | 是否支持 mock （WIP）                 | `Boolean` | `false` |
 | `show-default-value` | 是否展示默认值输入框                  | `Boolean` | `false` |
 
-### Events
 
-|    事件名称     | 说明                        |       回调参数        |
-| :-------------: | --------------------------- | :-------------------: |
-| `schema-change` | schema 发生变化时的回调函数 | 新的 json schema 对象 |
-
-## Related
-
-- [json-schema-editor-vue](https://github.com/zyqwst/json-schema-editor-vue) vue + ant-design-vue
 
 其他 json editor
 
